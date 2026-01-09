@@ -20,10 +20,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -57,13 +59,21 @@ public class WebSecurityConfig {
         auth.authenticationProvider(customAuthenticationProvider);
     }
 
+    @Value("${cors.allowed-origin-patterns:http://localhost:4200,http://localhost:3000,https://*.vercel.app}")
+    private String corsAllowedOriginPatterns;
+
+    @Value("${cors.allow-credentials:true}")
+    private boolean corsAllowCredentials;
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost:3000"));
+        List<String> patterns = Arrays.asList(corsAllowedOriginPatterns.trim().split("\\s*,\\s*"));
+        configuration.setAllowedOriginPatterns(patterns);
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(corsAllowCredentials);
+        configuration.setExposedHeaders(List.of("Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
