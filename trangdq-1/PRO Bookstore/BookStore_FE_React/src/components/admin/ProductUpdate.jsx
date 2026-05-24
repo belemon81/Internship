@@ -102,7 +102,7 @@ export default function ProductUpdate() {
         return (
             <div className="container">
                 {/*aside*/}
-                <div className="row">
+                <div className="row admin-layout-row">
                     <div className="col-3">
                         <aside className="admin-aside">
                             <div className="web-name">

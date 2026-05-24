@@ -130,7 +130,7 @@ class OrderByStatus extends React.Component {
             return (
                 <div className="container">
                     {/*aside*/}
-                    <div className="row">
+                    <div className="row admin-layout-row">
                         <div className="col-3">
                             <aside className="admin-aside">
                                 <div className="web-name">
@@ -173,6 +173,7 @@ class OrderByStatus extends React.Component {
                                     {this.state.status === "canceled" && <>Canceled </>}
                                     {this.state.status === "success" && <>Successful </>}
                                     Orders</h1>
+                                <div className="admin-table-wrap">
                                 <table className="table-list">
                                     <thead>
                                     <tr className="row m-0">
@@ -237,6 +238,7 @@ class OrderByStatus extends React.Component {
                                     )}
                                     </tbody>
                                 </table>
+                                </div>
                                 <div className="footer">
                                     <div className="pagination right">
                                         <p className="book-available">{this.state.total} orders

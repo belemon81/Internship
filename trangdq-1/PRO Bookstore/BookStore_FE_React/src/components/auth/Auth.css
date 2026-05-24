@@ -41,4 +41,29 @@
 .auth-wrapper {
     width: 100%;
     margin-bottom: 20px;
+    padding: 0 12px;
+}
+
+@media (max-width: 767px) {
+    .auth-inner,
+    .wider {
+        width: 100%;
+        max-width: 100%;
+        margin: 24px auto;
+        padding: 28px 20px;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 479px) {
+    .auth-inner,
+    .wider {
+        padding: 22px 16px;
+        border-radius: 10px;
+        box-shadow: 0 8px 32px rgba(34, 35, 58, 0.15);
+    }
+
+    .auth-wrapper .btn {
+        width: 100%;
+    }
 }

@@ -1,17 +1,30 @@
 .containerProductDetails {
     display: flex;
-    padding: 40px;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 24px 16px;
     margin: 0 auto;
-    width: 80%;
+    width: min(100%, 1100px);
+    max-width: 100%;
 }
 
 .pictures {
-    padding-right: 50px;
+    flex: 1 1 280px;
+    min-width: 0;
+    padding-right: 0;
+}
+
+.productDetails {
+    flex: 1 1 300px;
+    min-width: 0;
 }
 
 .big img {
-    width: 400px;
-    height: 500px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
 }
 
 .numberBar {
@@ -94,7 +107,50 @@ i {
 
 .smallContainer {
     display: flex;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     flex-wrap: wrap;
 }
 
+.addCartOrBuy {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+@media (max-width: 767px) {
+    .containerProductDetails {
+        flex-direction: column;
+        padding: 16px var(--page-gutter, 12px);
+        width: 100%;
+    }
+
+    .smallContainer {
+        max-width: 100%;
+    }
+
+    .big img {
+        max-width: 100%;
+    }
+
+    .pictures {
+        width: 100%;
+    }
+
+    .addCartOrBuy {
+        flex-direction: column;
+    }
+
+    .buyNow,
+    .addToCart {
+        width: 100%;
+        margin: 8px 0;
+        text-align: center;
+        min-height: var(--touch-min, 44px);
+    }
+
+    .nBtn {
+        min-width: var(--touch-min, 44px);
+        min-height: var(--touch-min, 44px);
+    }
+}

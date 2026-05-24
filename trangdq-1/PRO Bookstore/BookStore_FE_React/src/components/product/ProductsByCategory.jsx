@@ -3,6 +3,7 @@ import withRouter from './WithRouter';
 import {be_url} from '../share/Share';
 import axios from "axios";
 import NotFound from "../share/notfound/NotFound";
+import "../homepage/Homepage.css";
 
 class ProductsByCategory extends Component {
     state = {
@@ -61,12 +62,16 @@ class ProductsByCategory extends Component {
         }}>►</button>)
         if (this.state.products && this.state.products.length !== 0) {
             return (
-                <section className="container">
-                    <div className='carousel'>
-                        <img src="/images/book3.webp" alt='book3'/>
+                <section className="container page-container home-page">
+                    <div className="hero-section">
+                        <div className='carousel'>
+                            <img src="/images/book3.webp" alt='book3'/>
+                        </div>
+                        <div className="hero-copy">
+                            <h1 className="name_page">PRO BOOKSTORE</h1>
+                            <p className="subtitle">Every book is a journey, waiting to be opened.</p>
+                        </div>
                     </div>
-                    <div className="name_page mt-4 p-1">PRO BOOKSTORE</div>
-                    <div className="subtitle mt-4 p-1">Every book is a journey, waiting to be opened.</div>
                     <hr></hr>
                     <div className="wrapper">
                         <div className="inner">
@@ -110,12 +115,16 @@ class ProductsByCategory extends Component {
             )
         } else {
             return (
-                <section className="container">
-                    <div className='carousel'>
-                        <img src="/images/book3.webp" alt='book3'/>
+                <section className="container page-container home-page">
+                    <div className="hero-section">
+                        <div className='carousel'>
+                            <img src="/images/book3.webp" alt='book3'/>
+                        </div>
+                        <div className="hero-copy">
+                            <h1 className="name_page">PRO BOOKSTORE</h1>
+                            <p className="subtitle">Every book is a journey, waiting to be opened.</p>
+                        </div>
                     </div>
-                    <div className="name_page mt-4 p-1">PRO BOOKSTORE</div>
-                    <div className="subtitle mt-4 p-1">Every book is a journey, waiting to be opened.</div>
                     <hr></hr>
                     <NotFound title='(˶˃⤙˂˶) Nothing was found!'
                               details='Perhaps you should try viewing another category!'/>

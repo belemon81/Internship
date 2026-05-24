@@ -110,7 +110,8 @@ export default class ShoppingCart extends React.Component {
         if (role() === "ROLE_CUSTOMER" || role() === "ROLE_ADMIN") {
             return (
                 <>
-                    <div className="container text-center mt-3">
+                    <div className="container text-center mt-3 cart-page">
+                        <div className="cart-table-wrap">
                         <table className="table">
                             <thead>
                             <tr>
@@ -157,10 +158,13 @@ export default class ShoppingCart extends React.Component {
                             }
                             </tbody>
                         </table>
+                        </div>
+                        <div className="cart-summary">
                         <p>Total price: <strong>{this.state.total.toFixed(2)} $</strong></p>
                         <button className='buyNow' onClick={this.handleCheckout}>
                             Buy now
                         </button>
+                        </div>
                     </div>
                 </>
             )

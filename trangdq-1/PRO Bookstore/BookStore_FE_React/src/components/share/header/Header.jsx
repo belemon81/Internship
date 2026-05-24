@@ -11,13 +11,27 @@ class HeaderWithNavigate extends Component {
         name: "",
         numberOfItemInCart: 0,
         avatar: null,
-        isActive: ''
+        isActive: '',
+        menuOpen: false,
+        openDropdown: null
     }
     baseLink = fe_url + "category/"
 
     componentDidMount() {
-        this.getNumberOfItem();
-        this.getUserProfile();
+        if (userId()) {
+            this.getNumberOfItem();
+            this.getUserProfile();
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.menuOpen !== this.state.menuOpen) {
+            document.body.classList.toggle('nav-menu-open', this.state.menuOpen);
+        }
+    }
+
+    componentWillUnmount() {
+        document.body.classList.remove('nav-menu-open');
     }
 
     getUserProfile = () => {
@@ -48,7 +62,24 @@ class HeaderWithNavigate extends Component {
 
     search = (event) => {
         event.preventDefault();
+        this.setState({menuOpen: false});
         this.props.navigate(`/home?name=${this.state.name}`, {state: {name: this.state.name}})
+    }
+
+    toggleMenu = () => {
+        this.setState((prev) => ({menuOpen: !prev.menuOpen}));
+    }
+
+    closeMenu = () => {
+        this.setState({menuOpen: false, openDropdown: null});
+    }
+
+    toggleDropdown = (name) => (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.setState((prev) => ({
+            openDropdown: prev.openDropdown === name ? null : name
+        }));
     }
 
     logout = () => {
@@ -84,74 +115,117 @@ class HeaderWithNavigate extends Component {
 
     render() {
         return (
-            <nav>
+            <nav className="site-header">
+                {this.state.menuOpen &&
+                    <button
+                        type="button"
+                        className="menu-backdrop"
+                        aria-label="Close menu"
+                        onClick={this.closeMenu}
+                    />
+                }
                 <div className='top'>
                     {!accessToken() ?
-                        <nav className='ml-auto'>
-                            <Link to='/login'>&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;</Link>|
-                            <Link to='/register'>&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;</Link>|
+                        <nav className='top-auth ml-auto'>
+                            <Link to='/login' className="top-auth-link">Login</Link>
+                            <span className="top-auth-sep">|</span>
+                            <Link to='/register' className="top-auth-link">Register</Link>
                         </nav>
-                        : <nav className='ml-auto'>
-                            <span className="logout"
-                                  onClick={this.logout}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;&nbsp;&nbsp;</span>|
-                            {/* <a href='/login'>&nbsp;Re-login&nbsp;&nbsp;</a>|
-                            <a href='/register'>&nbsp;Re-register&nbsp;&nbsp;</a> */}
+                        : <nav className='top-auth ml-auto'>
+                            <button type="button" className="top-auth-link top-auth-btn logout"
+                                  onClick={this.logout}>Logout</button>
                         </nav>
                     }
                 </div>
                 <div className='menu'>
-                    <a href='/home'><img src='/images/icon.jpg' alt='logo' className='logo mt-1'></img></a>
-                    <div className='cats'>
-                        {(role() === "ROLE_ADMIN" || role() === "ROLE_CUSTOMER") &&
-                            <div className="dropdown">
-                                <div className="drop-btn"><i className="bi bi-cart-check"></i></div>
-                                <div className="dropdown-content">
-                                    <a href={fe_url + 'my_orders?status=customer_confirmed'}>Checked out orders</a>
-                                    <a href={fe_url + 'my_orders?status=admin_preparing'}>Preparing orders</a>
-                                    <a href={fe_url + 'my_orders?status=shipping'}>Shipping orders</a>
-                                    <a href={fe_url + 'my_orders?status=customer_request_cancel'}>Canceling orders</a>
-                                    <a href={fe_url + 'my_orders?status=canceled'}>Canceled orders</a><a
-                                    href={fe_url + 'my_orders?status=success'}>Successful orders</a>
-                                </div>
-                            </div>}
-                        {role() === "ROLE_ADMIN" &&
-                            <div className="dropdown pr-3">
-                                <div className="drop-btn"><i className="bi bi-person"></i></div>
-                                <div className="dropdown-content">
-                                    <a href={fe_url + 'admin/products'}>Manage books</a>
-                                    <a href={fe_url + 'admin/orders?status=customer_confirmed'}>Manage orders</a>
-                                    <a href={fe_url + 'admin/vouchers'}>Manage vouchers</a>
-                                </div>
-                            </div>}
-                        <span className="pt-0">
-                        <a href={this.baseLink + "detective"}
-                           className={this.isActive('detective') ? 'active' : ''}>Detective</a>
-                            <a href={this.baseLink + "fiction"}
-                               className={this.isActive('fiction') ? 'active' : ''}>Fiction</a>
-                            <a href={this.baseLink + "horror"}
-                               className={this.isActive('horror') ? 'active' : ''}>Horror</a>
-                            <a href={this.baseLink + "comic"}
-                               className={this.isActive('comic') ? 'active' : ''}>Comic</a>
-                            <a href={this.baseLink + "adventure"}
-                               className={this.isActive('adventure') ? 'active' : ''}>Adventure</a>
-                            <a href={this.baseLink + "literature"}
-                               className={this.isActive('literature') ? 'active' : ''}>Literature</a>
-                        </span>
+                    <div className="menu-brand">
+                        <a href='/home' onClick={this.closeMenu}>
+                            <img src='/images/icon.jpg' alt='logo' className='logo mt-1'/>
+                        </a>
+                        <button
+                            type="button"
+                            className="menu-toggle show-on-mobile-only"
+                            onClick={this.toggleMenu}
+                            aria-label="Toggle navigation menu"
+                            aria-expanded={this.state.menuOpen}
+                        >
+                            <i className={`bi ${this.state.menuOpen ? 'bi-x-lg' : 'bi-list'}`}/>
+                        </button>
                     </div>
 
-                    <form className='search-bar'>
-                        <input type='search' placeholder='Enter name of book'
-                               className={userId() ? 'mr-2 pl-2' : 'search mr-2'}
-                               id="name" onChange={this.handleChange}/>
-                        <button className='btn green-btn' onClick={this.search}>Search</button>
-                    </form>
-                    {(role() === "ROLE_ADMIN" || role() === "ROLE_CUSTOMER") && <>
-                        <Link to={fe_url + "cart"} className="mt-2"><i
-                            className="bi bi-cart2 customCart"><span
-                            className='numberOfItem'>{this.state.numberOfItemInCart}</span></i></Link>
-                        <Link to='/my_profile'><img className="account" src={this.state.avatar} alt="avatar"/></Link>
-                    </>}
-                    <div></div>
+                    <div className={`menu-panel ${this.state.menuOpen ? 'menu-panel-open' : ''}`}>
+                        <form className='search-bar menu-search-first' onSubmit={this.search}>
+                            <input type='search' placeholder='Enter name of book'
+                                   className={userId() ? 'search-input pl-2' : 'search search-input pl-2'}
+                                   id="name" onChange={this.handleChange}/>
+                            <button type="submit" className='btn green-btn menu-search-btn'>Search</button>
+                        </form>
+
+                        <div className='cats'>
+                            {(role() === "ROLE_ADMIN" || role() === "ROLE_CUSTOMER") &&
+                                <div className={`dropdown ${this.state.openDropdown === 'orders' ? 'is-open' : ''}`}>
+                                    <button type="button" className="drop-btn" aria-expanded={this.state.openDropdown === 'orders'}
+                                            onClick={this.toggleDropdown('orders')}>
+                                        <i className="bi bi-cart-check"/>
+                                        <span className="drop-label">Orders</span>
+                                    </button>
+                                    <div className="dropdown-content">
+                                        <a href={fe_url + 'my_orders?status=customer_confirmed'} onClick={this.closeMenu}>Checked out orders</a>
+                                        <a href={fe_url + 'my_orders?status=admin_preparing'} onClick={this.closeMenu}>Preparing orders</a>
+                                        <a href={fe_url + 'my_orders?status=shipping'} onClick={this.closeMenu}>Shipping orders</a>
+                                        <a href={fe_url + 'my_orders?status=customer_request_cancel'} onClick={this.closeMenu}>Canceling orders</a>
+                                        <a href={fe_url + 'my_orders?status=canceled'} onClick={this.closeMenu}>Canceled orders</a>
+                                        <a href={fe_url + 'my_orders?status=success'} onClick={this.closeMenu}>Successful orders</a>
+                                    </div>
+                                </div>}
+                            {role() === "ROLE_ADMIN" &&
+                                <div className={`dropdown pr-3 ${this.state.openDropdown === 'admin' ? 'is-open' : ''}`}>
+                                    <button type="button" className="drop-btn" aria-expanded={this.state.openDropdown === 'admin'}
+                                            onClick={this.toggleDropdown('admin')}>
+                                        <i className="bi bi-person"/>
+                                        <span className="drop-label">Admin</span>
+                                    </button>
+                                    <div className="dropdown-content">
+                                        <a href={fe_url + 'admin/products'} onClick={this.closeMenu}>Manage books</a>
+                                        <a href={fe_url + 'admin/orders?status=customer_confirmed'} onClick={this.closeMenu}>Manage orders</a>
+                                        <a href={fe_url + 'admin/vouchers'} onClick={this.closeMenu}>Manage vouchers</a>
+                                    </div>
+                                </div>}
+                            <span className="category-links pt-0">
+                                <a href={this.baseLink + "detective"}
+                                   className={this.isActive('detective') ? 'active' : ''}
+                                   onClick={this.closeMenu}>Detective</a>
+                                <a href={this.baseLink + "fiction"}
+                                   className={this.isActive('fiction') ? 'active' : ''}
+                                   onClick={this.closeMenu}>Fiction</a>
+                                <a href={this.baseLink + "horror"}
+                                   className={this.isActive('horror') ? 'active' : ''}
+                                   onClick={this.closeMenu}>Horror</a>
+                                <a href={this.baseLink + "comic"}
+                                   className={this.isActive('comic') ? 'active' : ''}
+                                   onClick={this.closeMenu}>Comic</a>
+                                <a href={this.baseLink + "adventure"}
+                                   className={this.isActive('adventure') ? 'active' : ''}
+                                   onClick={this.closeMenu}>Adventure</a>
+                                <a href={this.baseLink + "literature"}
+                                   className={this.isActive('literature') ? 'active' : ''}
+                                   onClick={this.closeMenu}>Literature</a>
+                            </span>
+                        </div>
+
+                        {(role() === "ROLE_ADMIN" || role() === "ROLE_CUSTOMER") &&
+                            <div className="menu-actions">
+                                <Link to={fe_url + "cart"} className="mt-2 menu-cart" onClick={this.closeMenu}>
+                                    <i className="bi bi-cart2 customCart">
+                                        <span className='numberOfItem'>{this.state.numberOfItemInCart}</span>
+                                    </i>
+                                </Link>
+                                <Link to='/my_profile' onClick={this.closeMenu}>
+                                    <img className="account" src={this.state.avatar} alt="avatar"/>
+                                </Link>
+                            </div>
+                        }
+                    </div>
                 </div>
                 <hr className="mb-0"></hr>
             </nav>

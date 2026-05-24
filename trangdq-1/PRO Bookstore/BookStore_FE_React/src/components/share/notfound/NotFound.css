@@ -1,3 +1,10 @@
 .empty {
-    padding: 200px;
+    padding: 80px 24px;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .empty {
+        padding: 48px 16px;
+    }
 }

@@ -27,8 +27,8 @@ function Footer() {
             </div>
             <hr></hr>
             <div className="container">
-                <div className="row">
-                    <div className="col-6 px-5">
+                <div className="footer-columns">
+                    <div className="footer-col footer-col-contact">
                         <h3>Contact Us</h3>
                         <p>Tel: (84-24) 38544338</p>
                         <p>Address: Km9, đường Nguyễn Trãi, quận Nam Từ Liêm, Hà Nội, Việt Nam</p>
@@ -39,14 +39,16 @@ function Footer() {
                             <li><a href="/public#"><i className="bi bi-tiktok"></i></a></li>
                         </ul>
                     </div>
-                    <div className="col-4 p-0">
-                        <h3>About Us</h3>
-                        <p>This is where you can buy any book you want!</p>
-                    </div>
-                    <div className="col-2 p-0">
-                        <h3>Our partners</h3>
-                        <p>Bookworm Group</p>
-                        <p>FIT, Hanoi University</p>
+                    <div className="footer-col-group">
+                        <div className="footer-col footer-col-side">
+                            <h3>About Us</h3>
+                            <p>This is where you can buy any book you want!</p>
+                        </div>
+                        <div className="footer-col footer-col-side">
+                            <h3>Our partners</h3>
+                            <p>Bookworm Group</p>
+                            <p>FIT, Hanoi University</p>
+                        </div>
                     </div>
                 </div>
             </div>
