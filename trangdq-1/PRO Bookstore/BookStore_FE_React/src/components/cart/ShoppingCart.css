@@ -1,5 +1,35 @@
-img {
+.cart-page {
+    padding: 0 12px 2rem;
+}
+
+.cart-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.cart-table-wrap table {
+    min-width: 560px;
+}
+
+.cart-table-wrap img {
     width: 50px;
     height: 50px;
     object-fit: cover;
+}
+
+.cart-summary {
+    padding: 0 8px 1rem;
+}
+
+@media (max-width: 767px) {
+    .cart-table-wrap .btn {
+        padding: 4px 8px;
+        font-size: 0.85rem;
+    }
+
+    .buyNow {
+        width: 100%;
+        max-width: 280px;
+    }
 }

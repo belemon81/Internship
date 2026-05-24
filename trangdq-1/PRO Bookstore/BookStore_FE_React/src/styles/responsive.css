@@ -1,0 +1,107 @@
+/* Shared responsive utilities and breakpoints */
+
+:root {
+    --bp-sm: 576px;
+    --bp-md: 768px;
+    --bp-lg: 992px;
+    --bp-xl: 1200px;
+    --brand-green: #33cc66;
+    --touch-min: 44px;
+    --page-gutter: clamp(12px, 3vw, 24px);
+    --header-z: 1000;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.table-responsive-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive-wrap table {
+    min-width: 520px;
+}
+
+main.app-main {
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+.page-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--page-gutter);
+    padding-right: var(--page-gutter);
+}
+
+/* Touch-friendly controls on coarse pointers (phones/tablets) */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .page,
+    .menu-toggle,
+    .drop-btn,
+    a.nav-touch-target {
+        min-height: var(--touch-min);
+    }
+
+    .category-links a {
+        min-height: var(--touch-min);
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* Hamburger visible below lg (992px) — must match Header.css */
+@media (max-width: 991px) {
+    .show-on-mobile-only {
+        display: inline-flex !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .show-on-mobile-only {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .hide-on-mobile {
+        display: none !important;
+    }
+}
+
+/* Product price row: replace floats on narrow screens */
+@media (max-width: 575px) {
+    .product-price {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .product-price .current-price,
+    .product-price .core-price,
+    .product-price .original-price {
+        float: none;
+    }
+}
+
+/* Safe area for notched devices */
+@supports (padding: max(0px)) {
+    .menu,
+    .top nav,
+    .dark-footer .container {
+        padding-left: max(var(--page-gutter), env(safe-area-inset-left));
+        padding-right: max(var(--page-gutter), env(safe-area-inset-right));
+    }
+}

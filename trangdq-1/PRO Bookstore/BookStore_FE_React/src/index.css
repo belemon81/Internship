@@ -7,9 +7,10 @@
 body {
     background: #ffffff;
     min-height: 100vh;
-    display: flex;
+    margin: 0;
     font-weight: 400;
     font-family: 'Fira Sans', sans-serif;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6, label, span {
@@ -17,8 +18,35 @@ h1, h2, h3, h4, h5, h6, label, span {
     font-family: 'Fira Sans', sans-serif;
 }
 
-body, html, #root {
+html {
     width: 100%;
+    overflow-x: hidden;
+}
+
+body, #root {
+    width: 100%;
+    min-height: 100vh;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+body.nav-menu-open {
+    overflow: hidden;
+    touch-action: none;
+}
+
+body.nav-menu-open .hero-section,
+body.nav-menu-open .hero-copy,
+body.nav-menu-open .carousel {
+    z-index: 0 !important;
 }
 
 .navbar-light {

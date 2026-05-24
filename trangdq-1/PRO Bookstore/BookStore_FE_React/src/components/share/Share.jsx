@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const req = axios.create({
-    baseURL: 'http://localhost:8080/',
+    baseURL: 'https://internship-p5ci.onrender.com/',
     headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + accessToken()
@@ -10,7 +10,7 @@ const req = axios.create({
 
 export default req;
 export const fe_url = "/"
-export const be_url = "http://localhost:8080/"
+export const be_url = "https://internship-p5ci.onrender.com/"
 
 export function accessToken() {
     return localStorage.getItem("access_token")

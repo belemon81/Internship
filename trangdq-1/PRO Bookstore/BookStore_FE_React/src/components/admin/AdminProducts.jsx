@@ -93,8 +93,7 @@ export default class AdminProducts extends React.Component {
             }}>►</button>)
             return (
                 <div className="container">
-                    {/*aside*/}
-                    <div className="row">
+                    <div className="row admin-layout-row">
                         <div className="col-3">
                             <aside className="admin-aside">
                                 <div className="web-name">
@@ -134,6 +133,7 @@ export default class AdminProducts extends React.Component {
                                     <h1 className="manager">Books</h1>
                                     <a className="btn btn-success btn-add" href={fe_url + "admin/product"}>Add
                                         new</a></div>
+                                <div className="admin-table-wrap">
                                 <table className="table-list">
                                     <thead>
                                     <tr>
@@ -154,7 +154,9 @@ export default class AdminProducts extends React.Component {
                                                     <td>{product.name}</td>
                                                     <td>{product.price.toFixed(2)}$</td>
                                                     <td>{product.inStock}</td>
-                                                    <td><img src={product.images[0]} alt={product.name}/></td>
+                                                    <td className="admin-img-cell">
+                                                        <img className="admin-product-thumb" src={product.images[0]} alt={product.name}/>
+                                                    </td>
                                                     <td>{product.category}</td>
                                                     <td>{product.discount}%</td>
                                                     <td>
@@ -172,6 +174,7 @@ export default class AdminProducts extends React.Component {
                                     )}
                                     </tbody>
                                 </table>
+                                </div>
                                 <div className="footer">
                                     <div className="pagination right">
                                         <p className="book-available">{this.state.total} books

@@ -89,7 +89,7 @@ export default class AdminVouchers extends React.Component {
             return (
                 <div className="container">
                     {/*aside*/}
-                    <div className="row">
+                    <div className="row admin-layout-row">
                         <div className="col-3">
                             <aside className="admin-aside">
                                 <div className="web-name">
@@ -129,6 +129,7 @@ export default class AdminVouchers extends React.Component {
                                     <h1 className="manager">Vouchers</h1>
                                     <a className="btn btn-success btn-add" href={fe_url + "admin/voucher"}>Add
                                         new</a></div>
+                                <div className="admin-table-wrap">
                                 <table className="table-list">
                                     <thead className="product-detail">
                                     <tr>
@@ -158,6 +159,7 @@ export default class AdminVouchers extends React.Component {
                                     )}
                                     </tbody>
                                 </table>
+                                </div>
                                 <div className="footer">
                                     <div className="pagination right">
                                         <p className="book-available">{this.state.total} vouchers

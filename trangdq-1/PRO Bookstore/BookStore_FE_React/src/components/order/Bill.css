@@ -41,13 +41,11 @@
 .boxinnotif {
     border-radius: 5px;
     border: 2px #33cc66 solid;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 10px;
-    width: 40%;
-    margin: auto;
-    margin-top: 50px;
+    padding: 5px 10px;
+    margin: 50px auto 0;
+    width: min(100%, 480px);
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .mess {
@@ -57,4 +55,21 @@
 
 .amount {
     border-radius: 5px;
+}
+
+@media (max-width: 767px) {
+    .address {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .mess {
+        flex-direction: column;
+        padding: 0 12px;
+    }
+
+    .boxofbill {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
 }

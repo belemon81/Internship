@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from "@angular/core";
 import {Subject} from "rxjs";
 
-export const SERVER_URL = "http://localhost:8080"
+export const SERVER_URL = "https://internship-p5ci.onrender.com"
 
 export const PASSWORD_PATTERN = /^[A-Z][a-zA-Z0-9]{7}$/;
 
