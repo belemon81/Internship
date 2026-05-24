@@ -10,7 +10,10 @@ h4 a {
 
 .cart-container {
   border-radius: 10px;
-  width: 75%;
+  width: min(75%, 100%);
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cart-title {
@@ -61,12 +64,34 @@ h4 a {
 
 
 @media (max-width: 768px) {
+  .cart-container {
+    width: 100%;
+    padding: 1rem !important;
+  }
+
+  .img-cart {
+    height: auto;
+    max-height: 220px;
+    margin-bottom: 0.75rem;
+  }
+
+  .all-total {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
   .input-group {
     padding: 0;
   }
 
   .text-muted {
     padding: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .cart-item .row > [class*="col-"] {
+    width: 100%;
   }
 }
 

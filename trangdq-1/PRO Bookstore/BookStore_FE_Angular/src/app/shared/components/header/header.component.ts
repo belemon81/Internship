@@ -49,17 +49,27 @@ export class HeaderComponent extends TakeUntilDestroy implements OnInit {
       })
   }
 
-  public search(): void {
-    this.searchService.setSearchKeyword(this.keyword);
-    this.router.navigate(['/home/1'], {queryParams: {search: this.keyword}})
+  public search(event?: Event): void {
+    event?.preventDefault()
+    const trimmed = this.keyword.trim()
+    this.searchService.setSearchKeyword(trimmed)
+    this.router.navigate(['/home/1'], {
+      queryParams: trimmed ? {search: trimmed} : {}
+    })
   }
 
-  public returnToHomepage() {
+  public returnToHomepage(event?: Event) {
+    event?.preventDefault()
     this.keyword = ''
-    this.searchService.setSearchKeyword(this.keyword);
+    this.searchService.setSearchKeyword('')
+    this.router.navigate(['/home/1'])
   }
 
   private loadState() {
+    const searchParam = this.route.snapshot.queryParamMap.get('search')
+    if (searchParam !== null) {
+      this.keyword = searchParam
+    }
     this.isLoggedIn$ = this.authService.isLoggedIn()
     this.isAdmin$ = this.authService.isAdmin()
     if (getUserId() && getRole() === 'ROLE_ADMIN') {

@@ -40,6 +40,40 @@
   padding-top: 1rem;
 }
 
+.home-toolbar h2 {
+  text-align: center;
+}
+
+.home-sort-group {
+  justify-content: center;
+}
+
+@media (max-width: 767px) {
+  .home-toolbar h2 {
+    font-size: 1.35rem;
+  }
+
+  .home-sort-group {
+    width: 100%;
+  }
+
+  .home-sort-group .btn {
+    flex: 1 1 auto;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .card-img-top {
+    height: 200px;
+  }
+}
+
+@media (max-width: 575px) {
+  .card-img-top {
+    height: 180px;
+  }
+}
+
 // ANIMATION
 
 .animated-badge {

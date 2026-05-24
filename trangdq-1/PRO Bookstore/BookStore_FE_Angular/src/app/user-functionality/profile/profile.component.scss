@@ -101,3 +101,29 @@
   color: #255b86;
   font-weight: 600
 }
+
+@media (max-width: 767px) {
+  .profile-update {
+    padding: 1.25rem;
+    margin-bottom: 5vh;
+  }
+
+  .profile-info .row > [class*="col-"] {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .avatar-container {
+    margin-bottom: 1rem;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .avatar-hint {
+    left: 50%;
+  }
+}

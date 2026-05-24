@@ -154,18 +154,39 @@ class HeaderWithNavigate extends Component {
                     </div>
 
                     <div className={`menu-panel ${this.state.menuOpen ? 'menu-panel-open' : ''}`}>
-                        <form className='search-bar menu-search-first' onSubmit={this.search}>
+                        <span className="category-links">
+                            <a href={this.baseLink + "detective"}
+                               className={this.isActive('detective') ? 'active' : ''}
+                               onClick={this.closeMenu}>Detective</a>
+                            <a href={this.baseLink + "fiction"}
+                               className={this.isActive('fiction') ? 'active' : ''}
+                               onClick={this.closeMenu}>Fiction</a>
+                            <a href={this.baseLink + "horror"}
+                               className={this.isActive('horror') ? 'active' : ''}
+                               onClick={this.closeMenu}>Horror</a>
+                            <a href={this.baseLink + "comic"}
+                               className={this.isActive('comic') ? 'active' : ''}
+                               onClick={this.closeMenu}>Comic</a>
+                            <a href={this.baseLink + "adventure"}
+                               className={this.isActive('adventure') ? 'active' : ''}
+                               onClick={this.closeMenu}>Adventure</a>
+                            <a href={this.baseLink + "literature"}
+                               className={this.isActive('literature') ? 'active' : ''}
+                               onClick={this.closeMenu}>Literature</a>
+                        </span>
+
+                        <form className='search-bar menu-search' onSubmit={this.search}>
                             <input type='search' placeholder='Enter name of book'
                                    className={userId() ? 'search-input pl-2' : 'search search-input pl-2'}
                                    id="name" onChange={this.handleChange}/>
                             <button type="submit" className='btn green-btn menu-search-btn'>Search</button>
                         </form>
 
-                        <div className='cats'>
+                        <div className="menu-user-nav">
                             {(role() === "ROLE_ADMIN" || role() === "ROLE_CUSTOMER") &&
-                                <div className={`dropdown ${this.state.openDropdown === 'orders' ? 'is-open' : ''}`}>
-                                    <button type="button" className="drop-btn" aria-expanded={this.state.openDropdown === 'orders'}
-                                            onClick={this.toggleDropdown('orders')}>
+                                <div className={`dropdown menu-dropdown ${this.state.openDropdown === 'orders' ? 'is-open' : ''}`}>
+                                    <button type="button" className="drop-btn drop-btn-compact" aria-expanded={this.state.openDropdown === 'orders'}
+                                            onClick={this.toggleDropdown('orders')} title="Orders">
                                         <i className="bi bi-cart-check"/>
                                         <span className="drop-label">Orders</span>
                                     </button>
@@ -179,9 +200,9 @@ class HeaderWithNavigate extends Component {
                                     </div>
                                 </div>}
                             {role() === "ROLE_ADMIN" &&
-                                <div className={`dropdown pr-3 ${this.state.openDropdown === 'admin' ? 'is-open' : ''}`}>
-                                    <button type="button" className="drop-btn" aria-expanded={this.state.openDropdown === 'admin'}
-                                            onClick={this.toggleDropdown('admin')}>
+                                <div className={`dropdown menu-dropdown ${this.state.openDropdown === 'admin' ? 'is-open' : ''}`}>
+                                    <button type="button" className="drop-btn drop-btn-compact" aria-expanded={this.state.openDropdown === 'admin'}
+                                            onClick={this.toggleDropdown('admin')} title="Admin">
                                         <i className="bi bi-person"/>
                                         <span className="drop-label">Admin</span>
                                     </button>
@@ -191,40 +212,19 @@ class HeaderWithNavigate extends Component {
                                         <a href={fe_url + 'admin/vouchers'} onClick={this.closeMenu}>Manage vouchers</a>
                                     </div>
                                 </div>}
-                            <span className="category-links pt-0">
-                                <a href={this.baseLink + "detective"}
-                                   className={this.isActive('detective') ? 'active' : ''}
-                                   onClick={this.closeMenu}>Detective</a>
-                                <a href={this.baseLink + "fiction"}
-                                   className={this.isActive('fiction') ? 'active' : ''}
-                                   onClick={this.closeMenu}>Fiction</a>
-                                <a href={this.baseLink + "horror"}
-                                   className={this.isActive('horror') ? 'active' : ''}
-                                   onClick={this.closeMenu}>Horror</a>
-                                <a href={this.baseLink + "comic"}
-                                   className={this.isActive('comic') ? 'active' : ''}
-                                   onClick={this.closeMenu}>Comic</a>
-                                <a href={this.baseLink + "adventure"}
-                                   className={this.isActive('adventure') ? 'active' : ''}
-                                   onClick={this.closeMenu}>Adventure</a>
-                                <a href={this.baseLink + "literature"}
-                                   className={this.isActive('literature') ? 'active' : ''}
-                                   onClick={this.closeMenu}>Literature</a>
-                            </span>
+                            {(role() === "ROLE_ADMIN" || role() === "ROLE_CUSTOMER") &&
+                                <div className="menu-actions">
+                                    <Link to={fe_url + "cart"} className="menu-cart" onClick={this.closeMenu}>
+                                        <i className="bi bi-cart2 customCart">
+                                            <span className='numberOfItem'>{this.state.numberOfItemInCart}</span>
+                                        </i>
+                                    </Link>
+                                    <Link to='/my_profile' onClick={this.closeMenu}>
+                                        <img className="account" src={this.state.avatar} alt="avatar"/>
+                                    </Link>
+                                </div>
+                            }
                         </div>
-
-                        {(role() === "ROLE_ADMIN" || role() === "ROLE_CUSTOMER") &&
-                            <div className="menu-actions">
-                                <Link to={fe_url + "cart"} className="mt-2 menu-cart" onClick={this.closeMenu}>
-                                    <i className="bi bi-cart2 customCart">
-                                        <span className='numberOfItem'>{this.state.numberOfItemInCart}</span>
-                                    </i>
-                                </Link>
-                                <Link to='/my_profile' onClick={this.closeMenu}>
-                                    <img className="account" src={this.state.avatar} alt="avatar"/>
-                                </Link>
-                            </div>
-                        }
                     </div>
                 </div>
                 <hr className="mb-0"></hr>

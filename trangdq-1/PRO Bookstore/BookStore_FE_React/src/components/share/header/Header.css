@@ -72,11 +72,18 @@
     padding: 0;
 }
 
+.menu-user-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
 .menu-actions {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-left: auto;
+    gap: 0.35rem;
+    margin-left: 0;
 }
 
 .category-links {
@@ -231,6 +238,69 @@ form input {
 @media (min-width: 992px) {
     .drop-label {
         display: none;
+    }
+
+    .menu {
+        flex-wrap: nowrap;
+    }
+
+    .menu-brand {
+        flex: 0 0 auto;
+    }
+
+    .menu-panel {
+        display: flex !important;
+        flex: 1 1 auto;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 0.5rem;
+        overflow: visible;
+    }
+
+    .category-links {
+        order: 1;
+        flex: 0 1 auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+    }
+
+    .menu-search {
+        order: 2;
+        flex: 0 1 260px;
+        flex-direction: row;
+        align-items: center;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-user-nav {
+        order: 3;
+        margin-left: auto;
+        flex-wrap: nowrap;
+    }
+
+    .drop-btn-compact {
+        padding: 5px 8px;
+        min-height: 32px;
+        min-width: 32px;
+        margin-right: 0;
+    }
+
+    .drop-btn-compact i {
+        font-size: 0.95rem;
+    }
+
+    .account {
+        width: 38px;
+        height: 38px;
+        margin: 0;
+    }
+
+    .customCart {
+        min-width: 34px;
+        min-height: 34px;
+        font-size: 1.15rem;
     }
 }
 
@@ -401,6 +471,7 @@ form input {
 
     .category-links {
         flex-direction: column;
+        order: 1;
     }
 
     .category-links a {
@@ -409,7 +480,7 @@ form input {
         border-bottom: 1px solid #f0f0f0;
     }
 
-    .menu-search-first {
+    .menu-search {
         order: -1;
         width: 100%;
         flex-direction: column;
@@ -417,6 +488,13 @@ form input {
         padding-bottom: 0.5rem;
         margin-bottom: 0.25rem;
         border-bottom: 1px solid #eee;
+    }
+
+    .menu-user-nav {
+        order: 2;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .search-bar {

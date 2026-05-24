@@ -166,17 +166,17 @@ class HomepageWithLocation extends Component {
         if (this.state.products && this.state.products.length !== 0) {
             return (
                 <>
-                    <section className="container page-container home-page">
-                        <div className="hero-section">
-                            <div className='carousel'>
-                                <img src="/images/book3.webp" alt='book3'/>
-                            </div>
-                            <div className="hero-copy">
-                                <h1 className="name_page">PRO BOOKSTORE</h1>
-                                <p className="subtitle">Every book is a journey, waiting to be opened.</p>
-                            </div>
+                    <div className="hero-section hero-fullwidth">
+                        <div className='carousel'>
+                            <img src="/images/book3.webp" alt='book3'/>
                         </div>
-                        <hr></hr>
+                        <div className="hero-copy">
+                            <h1 className="name_page">PRO BOOKSTORE</h1>
+                            <p className="subtitle">Every book is a journey, waiting to be opened.</p>
+                        </div>
+                    </div>
+                    <section className="container page-container home-page">
+                        <hr className="home-divider"></hr>
                         <div className="wrapper">
                             <div className="text-center p-2 home-sort-toolbar">
                                 <span className="mx-2">

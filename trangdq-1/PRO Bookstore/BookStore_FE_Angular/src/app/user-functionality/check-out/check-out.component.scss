@@ -33,18 +33,34 @@ button {
   padding: 10px 20px;
 }
 
-@media(max-width: 1000px) {
-  .col-md-6,
-  .col-md-5 {
+@media (max-width: 1000px) {
+  .checkout-form,
+  .items-display {
+    margin: 2vh auto 6vh;
+    padding: 1.25rem;
+  }
+
+  .row > [class*="col-md-"] {
     width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 
   .col-sm-4 {
-    width: 20%
+    width: 100%;
+    max-width: 120px;
   }
 
-  .col.sm-8 {
-    width: 80%;
+  .col-sm-8 {
+    width: 100%;
+    flex: 1;
+  }
+}
+
+@media (max-width: 575px) {
+  .checkout-form button,
+  .items-display button {
+    width: 100%;
   }
 }
 
