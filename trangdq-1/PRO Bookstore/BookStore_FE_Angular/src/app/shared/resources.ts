@@ -2,10 +2,10 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {Subject} from "rxjs";
 
 export const SERVER_URL = "https://internship-p5ci.onrender.com"
-
-export const PASSWORD_PATTERN = /^[A-Z][a-zA-Z0-9]$/;
-
-export const EMAIL_PATTERN = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]$/
+ 
+export const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+ 
+export const EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export const PHONE_PATTERN = /^[0-9]{10}$/;
 

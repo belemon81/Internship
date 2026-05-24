@@ -46,8 +46,8 @@ export class LoginComponent extends TakeUntilDestroy {
       this.errors[0].message = "*Username is not available."
       should = false
     }
-    if (!password.match(PASSWORD_PATTERN)) {
-      this.errors[1].message = "*Invalid password."
+    if (!password.trim()) {
+      this.errors[1].message = "*Password is not available."
       should = false
     }
     return should
