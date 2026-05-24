@@ -115,9 +115,9 @@ export default class ShoppingCart extends React.Component {
                         <table className="table">
                             <thead>
                             <tr>
-                                <th colSpan="5" className="h3 m-0">My shopping cart</th>
+                                <th colSpan="5" className="h3 m-0 cart-head-title">My shopping cart</th>
                             </tr>
-                            <tr className="h5">
+                            <tr className="h5 cart-head-labels">
                                 <th></th>
                                 <th>Book name</th>
                                 <th>Book price</th>
@@ -129,23 +129,23 @@ export default class ShoppingCart extends React.Component {
                             {
                                 this.state.outputCarts
                                     .map(outputCart =>
-                                        <tr key={outputCart.productId}>
-                                            <td><img src={outputCart.images[0]} alt="img"></img></td>
-                                            <td><a href={"/product/" + outputCart.productId}>{outputCart.name}</a></td>
-                                            <td> {(outputCart.price - outputCart.price * outputCart.discount / 100).toFixed(2)} $</td>
-                                            <td>
+                                        <tr key={outputCart.productId} className="cart-item-row">
+                                            <td data-label=""><img src={outputCart.images[0]} alt="img"></img></td>
+                                            <td data-label="Book"><a href={"/product/" + outputCart.productId}>{outputCart.name}</a></td>
+                                            <td data-label="Price">{(outputCart.price - outputCart.price * outputCart.discount / 100).toFixed(2)} $</td>
+                                            <td data-label="Qty">
                                                 <div className='bar'>
-                                                    <button className='nBtn'
+                                                    <button type="button" className='nBtn'
                                                             onClick={() => this.handleDecrement(outputCart)}>-
                                                     </button>
                                                     <span className='number'>{outputCart.quantity}</span>
-                                                    <button className='nBtn'
+                                                    <button type="button" className='nBtn'
                                                             onClick={() => this.handleIncrement(outputCart)}>+
                                                     </button>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <button className="btn green-btn" onClick={() => {
+                                            <td data-label="">
+                                                <button type="button" className="btn green-btn" onClick={() => {
                                                     if (window.confirm("Are you sure you want to delete this book?")) {
                                                         this.handleDelete(outputCart.productId);
                                                     }

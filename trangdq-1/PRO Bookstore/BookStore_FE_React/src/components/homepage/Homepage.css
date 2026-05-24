@@ -43,16 +43,16 @@
     list-style: none;
     padding: 10px;
     margin: 0;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 10px;
+    align-items: stretch;
 }
 
 .product {
-    width: calc(20% - 8px);
-    flex: 0 0 calc(20% - 8px);
+    width: 100%;
+    min-width: 0;
     padding: 0;
-    display: flex;
 }
 
 .product-item {
@@ -64,13 +64,14 @@
     box-sizing: border-box;
     color: #33cc66;
     text-decoration: none;
-    display: flex;
+    display: flex!important;
     flex-direction: column;
     height: 100%;
     background: #fff;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     border-radius: 20px;
     overflow: hidden;
+    height: 100%;
 }
 
 .product-img {
@@ -335,16 +336,24 @@
 }
 
 .home-sort-toolbar {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
-    gap: 0.5rem;
+    display: flex;
+    flex-wrap: nowrap;
     justify-content: center;
-    max-width: 640px;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
 }
 
 .home-sort-toolbar > span {
-    display: contents;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    flex: 0 0 auto;
 }
 
 .home-sort-toolbar .btn {
@@ -354,12 +363,13 @@
     justify-content: center;
     gap: 0.35rem;
     height: auto;
-    min-height: 40px;
+    min-height: 38px;
     margin: 0 !important;
-    width: 100%;
+    width: auto;
+    flex: 0 0 auto;
     font-size: 0.8rem;
     white-space: nowrap;
-    padding: 0.45rem 0.5rem;
+    padding: 0.45rem 0.65rem;
     line-height: 1;
 }
 
@@ -372,9 +382,8 @@
 }
 
 @media (max-width: 1199px) {
-    .product {
-        width: calc(25% - 8px);
-        flex: 0 0 calc(25% - 8px);
+    .box {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
 
@@ -383,9 +392,8 @@
         padding: 0 8px;
     }
 
-    .product {
-        width: calc(33.333% - 8px);
-        flex: 0 0 calc(33.333% - 8px);
+    .box {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .carousel {
@@ -395,9 +403,8 @@
 }
 
 @media (max-width: 767px) {
-    .product {
-        width: calc(50% - 8px);
-        flex: 0 0 calc(50% - 8px);
+    .box {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .products {
@@ -441,13 +448,18 @@
     }
 
     .home-sort-toolbar {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .home-sort-toolbar > span {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .home-sort-toolbar .btn {
         font-size: 0.75rem;
-        padding: 0.4rem 0.35rem;
+        padding: 0.4rem 0.5rem;
     }
 }
 
