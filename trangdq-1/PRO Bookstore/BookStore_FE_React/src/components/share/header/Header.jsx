@@ -116,14 +116,6 @@ class HeaderWithNavigate extends Component {
     render() {
         return (
             <nav className="site-header">
-                {this.state.menuOpen &&
-                    <button
-                        type="button"
-                        className="menu-backdrop"
-                        aria-label="Close menu"
-                        onClick={this.closeMenu}
-                    />
-                }
                 <div className='top'>
                     {!accessToken() ?
                         <nav className='top-auth ml-auto'>
@@ -137,6 +129,14 @@ class HeaderWithNavigate extends Component {
                         </nav>
                     }
                 </div>
+                {this.state.menuOpen &&
+                    <button
+                        type="button"
+                        className="menu-backdrop"
+                        aria-label="Close menu"
+                        onClick={this.closeMenu}
+                    />
+                }
                 <div className='menu'>
                     <div className="menu-brand">
                         <a href='/home' onClick={this.closeMenu}>

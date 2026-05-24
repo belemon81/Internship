@@ -4,7 +4,6 @@
     z-index: var(--header-z, 1100);
     background: #fff;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    isolation: isolate;
 }
 
 .menu-backdrop {
@@ -205,14 +204,31 @@ form input {
     min-width: 0;
 }
 
-.search-bar {
+.search-bar,
+.menu-search {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    flex: 1 1 220px;
+    flex: 1 1 auto;
     min-width: 0;
-    margin: 0;
+    margin: 0 auto;
+}
+
+.menu-search .search-input {
+    flex: 1 1 200px;
+    width: auto;
+    max-width: 280px;
+    min-width: 120px;
+}
+
+.menu-search .menu-search-btn,
+.menu-search .green-btn {
+    flex: 0 0 auto;
+    width: auto !important;
+    white-space: nowrap;
 }
 
 .drop-btn {
@@ -266,12 +282,13 @@ form input {
 
     .menu-search {
         order: 2;
-        flex: 0 1 260px;
-        flex-direction: row;
-        align-items: center;
+        flex: 1 1 280px;
+        max-width: 340px;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
         border: none;
         padding: 0;
-        margin: 0;
     }
 
     .menu-user-nav {
@@ -422,19 +439,25 @@ form input {
 }
 
 @media (max-width: 991px) {
+    .site-header {
+        position: sticky;
+    }
+
     .menu-backdrop {
         display: block;
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.45);
-        z-index: 1090;
+        z-index: 1098;
+        border: none;
+        padding: 0;
     }
 
     .menu {
         flex-direction: column;
         align-items: stretch;
         position: relative;
-        z-index: var(--header-z, 1000);
+        z-index: 1099;
     }
 
     .menu-brand {
@@ -454,13 +477,15 @@ form input {
         max-height: calc(100dvh - 120px);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        padding: 0.75rem 0;
+        padding: 0.75rem 1rem;
         border-top: 1px solid #e8e8e8;
         background: #fff;
+        position: relative;
+        z-index: 1100;
     }
 
     .menu-panel-open {
-        display: flex;
+        display: flex !important;
     }
 
     .cats {
@@ -483,11 +508,20 @@ form input {
     .menu-search {
         order: -1;
         width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        padding-bottom: 0.5rem;
-        margin-bottom: 0.25rem;
+        max-width: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 0 0.75rem;
+        margin: 0 auto 0.5rem;
         border-bottom: 1px solid #eee;
+    }
+
+    .menu-search .search-input {
+        flex: 1 1 auto;
+        max-width: none;
+        min-width: 0;
     }
 
     .menu-user-nav {
@@ -497,32 +531,12 @@ form input {
         align-items: stretch;
     }
 
-    .search-bar {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
     .search,
     .search-input {
-        width: 100%;
         text-align: left;
         line-height: 1.25;
-        padding-top: 10px;
-        padding-bottom: 8px;
-        height: auto;
-        min-height: 44px;
-    }
-
-    .search-input::placeholder {
-        line-height: 1.25;
-        opacity: 1;
-    }
-
-    .menu-panel-open {
-        position: relative;
-        z-index: 1102;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        height: 40px;
+        min-height: 40px;
     }
 
     .menu-actions {
@@ -571,7 +585,12 @@ form input {
         margin-right: 0;
     }
 
-    .btn {
+    .menu-panel .drop-btn {
         width: 100%;
+    }
+
+    .menu-search .menu-search-btn {
+        width: auto !important;
+        min-width: 72px;
     }
 }

@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product, ResponseObject, TakeUntilDestroy} from '../shared/resources';
-import {filter, merge, Observable, of, switchMap, takeUntil} from 'rxjs';
+import {catchError, combineLatest, Observable, of, switchMap, takeUntil, tap} from 'rxjs';
 import {ProductService} from '../shared/services/product.service';
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {SearchService} from "../shared/services/search.service";
 
 @Component({
@@ -10,7 +10,7 @@ import {SearchService} from "../shared/services/search.service";
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent extends TakeUntilDestroy {
+export class HomeComponent extends TakeUntilDestroy implements OnInit {
   public page: number = 1
   public products: Array<Product> = []
   public total_pages: number = 0
@@ -24,30 +24,33 @@ export class HomeComponent extends TakeUntilDestroy {
   constructor(
     private searchService: SearchService,
     private productService: ProductService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {
     super()
   }
 
   public ngOnInit(): void {
-    merge(
-      of(null),
-      this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-    ).pipe(
+    combineLatest([
+      this.route.paramMap,
+      this.route.queryParamMap
+    ]).pipe(
       takeUntil(this.destroy$),
-      switchMap(() => this.fetchProducts())
+      tap(() => {
+        this.loading = true
+      }),
+      switchMap(() =>
+        this.fetchProducts().pipe(
+          catchError((error) => {
+            console.log(error)
+            return of({data: {content: [], totalPages: 0}} as ResponseObject)
+          })
+        )
+      )
     ).subscribe({
       next: (response) => {
-        this.products = <Array<Product>>response.data.content ?? []
-        this.total_pages = <number>response.data.totalPages ?? 0
-        this.loading = false
-        this.hasLoaded = true
-      },
-      error: (error) => {
-        console.log(error)
-        this.products = []
-        this.total_pages = 0
+        const content = response?.data?.content
+        this.products = Array.isArray(content) ? content : []
+        this.total_pages = response?.data?.totalPages ?? 0
         this.loading = false
         this.hasLoaded = true
       }
@@ -55,8 +58,6 @@ export class HomeComponent extends TakeUntilDestroy {
   }
 
   private fetchProducts(): Observable<ResponseObject> {
-    this.loading = true
-
     const pageNo = this.route.snapshot.paramMap.get('page')
     if (pageNo) {
       this.page = Number.parseInt(pageNo, 10)
