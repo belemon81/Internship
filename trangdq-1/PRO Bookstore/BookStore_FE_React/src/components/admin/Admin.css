@@ -1,17 +1,25 @@
 .admin-aside {
-    height: 100%;
     min-height: 100vh;
-    padding-top: 10px;
-    padding-left: 40px;
-    background: #86ffaa;
-    border-right: #33CC66 2px solid;
-    line-height: 1.4rem;
-    font-size: 1.1rem;
+    padding: 1.25rem 1rem;
+    background: linear-gradient(180deg, #f8fffb 0%, #ecfdf3 100%);
+    border-right: 1px solid #86efac;
+    line-height: 1.4;
+    font-size: 0.95rem;
 }
 
 .col-3, .col-9 {
     padding: 0;
     margin: 0;
+}
+
+.admin-layout-row > .col-3 {
+    flex: 0 0 240px;
+    max-width: 240px;
+}
+
+.admin-layout-row > .col-9 {
+    flex: 1 1 auto;
+    max-width: calc(100% - 240px);
 }
 
 .container {
@@ -20,10 +28,94 @@
 }
 
 .admin-logo {
-    margin: 10px 5px 10px 0;
-    width: 40px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     object-fit: cover;
+    border-radius: 6px;
+    vertical-align: middle;
+}
+
+.web-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #bbf7d0;
+}
+
+.web-name a {
+    color: #14532d;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.web-name a:hover {
+    color: #15803d;
+}
+
+.admin-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.admin-navigation {
+    display: block;
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    color: #166534;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.admin-navigation:hover {
+    background: #dcfce7;
+    color: #14532d;
+}
+
+.admin-aside .current-pos {
+    background: #22c55e;
+    color: #fff;
+}
+
+.admin-aside .current-pos:hover {
+    background: #16a34a;
+    color: #fff;
+}
+
+.admin-aside .dropdown {
+    position: relative;
+}
+
+.admin-aside .dropdown-content {
+    position: static;
+    display: none;
+    margin: 0.25rem 0 0.5rem 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid #bbf7d0;
+    box-shadow: none;
+    background: transparent;
+    min-width: auto;
+}
+
+.admin-aside .dropdown:hover .dropdown-content,
+.admin-aside .dropdown:focus-within .dropdown-content {
+    display: block;
+}
+
+.admin-aside .dropdown-content a {
+    display: block;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.88rem;
+    color: #166534;
+    border-radius: 6px;
+}
+
+.admin-aside .dropdown-content a:hover {
+    background: #dcfce7;
 }
 
 .image-item {
@@ -37,15 +129,10 @@
     font-size: 12px;
     border-radius: 5px;
     padding: 5px;
-    bottom: 12px;
     background: red;
     top: -20px;
     right: -10px;
     z-index: 2;
-}
-
-.image-item i:hover {
-    color: white;
 }
 
 .guide {
@@ -53,20 +140,19 @@
 }
 
 .admin-header {
-    background: #33CC66;;
+    background: #22c55e;
     margin-bottom: 15px;
-    padding-top: 10px;
+    padding: 0.65rem 1.25rem;
     text-align: right;
-    height: 40px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #fff;
 }
 
-.admin-navigation {
-    display: block;
-    font-weight: 450;
-}
-
-.admin-navigation:hover {
-    color: #0c8531;
+.admin-header .welcome {
+    font-weight: 500;
 }
 
 article table h1 {
@@ -77,7 +163,6 @@ article table h1 {
     padding: 10px 0 10px 25px;
     position: relative;
 }
-
 
 .btn-add {
     display: inline-block;
@@ -91,15 +176,6 @@ article table h1 {
 
 .btn-add:hover {
     background-color: rgba(70, 255, 100, 1);
-}
-
-.web-name {
-    font-weight: bolder;
-    font-size: 1.4rem;
-}
-
-.web-name a:hover {
-    color: #0c8531;
 }
 
 .table-list {
@@ -140,7 +216,7 @@ th, td {
 .book-available {
     font-weight: bold;
     position: absolute;
-    left: 25px
+    left: 25px;
 }
 
 th {
@@ -152,17 +228,14 @@ th {
     height: 75px;
 }
 
-.current-pos {
-    color: #0c8531;
-}
-
 .arr {
     position: absolute;
     right: 0;
 }
 
 .admin-body {
-    padding: 10px 10px 0 10px;
+    padding: 10px 16px 0;
+    background: #fff;
 }
 
 .form {
@@ -172,17 +245,6 @@ th {
 
 .dropdown_icon {
     font-size: 10px;
-}
-
-.dropdown-content {
-    width: max-content;
-    display: none;
-    position: absolute;
-    z-index: 3;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
 }
 
 .admin-layout-row {
@@ -202,12 +264,13 @@ th {
 @media (max-width: 991px) {
     .admin-aside {
         min-height: auto;
-        padding: 16px;
+        padding: 1rem;
         border-right: none;
-        border-bottom: #33CC66 2px solid;
+        border-bottom: 1px solid #86efac;
     }
 
-    .admin-layout-row > [class*="col-"] {
+    .admin-layout-row > .col-3,
+    .admin-layout-row > .col-9 {
         flex: 0 0 100%;
         max-width: 100%;
     }
@@ -260,14 +323,6 @@ th {
 
     .admin-header {
         text-align: center;
-        height: auto;
-        padding-bottom: 10px;
+        justify-content: center;
     }
 }
-
-
-
-
-
-
-

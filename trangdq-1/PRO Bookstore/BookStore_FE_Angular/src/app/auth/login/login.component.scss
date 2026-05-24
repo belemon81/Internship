@@ -51,3 +51,16 @@
   object-fit: cover;
   margin-bottom: 20px;
 }
+
+@media (max-width: 575px) {
+  .login-container {
+    margin: 4vh auto;
+    padding: 1.25rem;
+    max-width: 100%;
+  }
+
+  .col-md-6.offset-md-3 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

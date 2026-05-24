@@ -11,62 +11,67 @@
 }
 
 .slogans {
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
     background-color: #f7fffa;
-    justify-content: space-around;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 1.25rem 1rem;
 }
 
-
 .slogans div {
-    display: inline-block;
-    width: 25%;
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     text-align: center;
-    justify-content: center;
+    width: auto;
 }
 
 .imgFooter {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
 }
 
-.container {
+.slogans p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.dark-footer .container {
     max-width: 1200px;
     margin: 0 auto;
-
 }
 
-.container ul {
+.dark-footer .container ul {
     margin-top: 10px;
 }
 
-h3 {
+.dark-footer h3 {
     font-size: 1.5rem;
     margin-top: 0;
 }
 
-p {
+.dark-footer p {
     margin: 0;
 }
 
-i {
+.dark-footer i {
     color: black;
     padding: 10px;
     font-size: 30px;
 }
 
-i:hover {
+.dark-footer i:hover {
     color: #33cc66;
 }
 
-ul {
+.dark-footer ul {
     list-style-type: none;
     padding-left: 0;
 }
 
-ul li {
+.dark-footer ul li {
     display: inline;
 }
 
@@ -99,27 +104,20 @@ ul li {
 
 @media (max-width: 991px) {
     .slogans {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .slogans div {
-        display: block;
-        width: calc(50% - 1rem);
-        min-width: 140px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem 0.75rem;
     }
 
     .imgFooter {
-        width: 72px;
-        height: 72px;
+        width: 64px;
+        height: 64px;
     }
 }
 
 @media (max-width: 575px) {
-    .slogans div {
-        width: 100%;
+    .slogans {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 1rem 0.75rem;
     }
 
     .footer-columns {
@@ -141,7 +139,7 @@ ul li {
         padding: 0 1rem 1.5rem;
     }
 
-    i {
+    .dark-footer i {
         font-size: 24px;
         padding: 6px;
     }

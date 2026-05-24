@@ -62,8 +62,8 @@ class ProductsByCategory extends Component {
         }}>►</button>)
         if (this.state.products && this.state.products.length !== 0) {
             return (
-                <section className="container page-container home-page">
-                    <div className="hero-section">
+                <>
+                <div className="hero-section hero-fullwidth">
                         <div className='carousel'>
                             <img src="/images/book3.webp" alt='book3'/>
                         </div>
@@ -72,7 +72,8 @@ class ProductsByCategory extends Component {
                             <p className="subtitle">Every book is a journey, waiting to be opened.</p>
                         </div>
                     </div>
-                    <hr></hr>
+                    <section className="container page-container home-page">
+                    <hr className="home-divider"></hr>
                     <div className="wrapper">
                         <div className="inner">
                             <div className="grid mg-left-10">
@@ -112,11 +113,12 @@ class ProductsByCategory extends Component {
                         </div>
                     </div>
                 </section>
+                </>
             )
         } else {
             return (
-                <section className="container page-container home-page">
-                    <div className="hero-section">
+                <>
+                    <div className="hero-section hero-fullwidth">
                         <div className='carousel'>
                             <img src="/images/book3.webp" alt='book3'/>
                         </div>
@@ -125,10 +127,12 @@ class ProductsByCategory extends Component {
                             <p className="subtitle">Every book is a journey, waiting to be opened.</p>
                         </div>
                     </div>
-                    <hr></hr>
+                    <section className="container page-container home-page">
+                    <hr className="home-divider"></hr>
                     <NotFound title='(˶˃⤙˂˶) Nothing was found!'
                               details='Perhaps you should try viewing another category!'/>
                 </section>
+                </>
             )
         }
     }
