@@ -67,3 +67,30 @@ th {
   color: black;
   font-weight: 300;
 }
+
+@media (max-width: 991px) {
+  .history > .d-flex {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch !important;
+  }
+
+  .custom-select {
+    width: 100%;
+  }
+
+  .history .fw-bold.text-white {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  #orders {
+    min-width: 720px;
+  }
+}
+
+@media (max-width: 575px) {
+  .history {
+    padding: 0 var(--page-gutter, 0.75rem);
+  }
+}

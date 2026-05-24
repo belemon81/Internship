@@ -1,12 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --header-height: 72px;
+  --touch-min: 44px;
+  --page-gutter: 1rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background-image: url('./assets/background.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
+  min-height: 100%;
   font-family: 'Open Sans', sans-serif;
-  margin-top: 80px;
+  margin-top: var(--header-height);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container,
+.container-fluid {
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+}
+
+.table-responsive-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 991px) {
+  :root {
+    --header-height: 64px;
+  }
+}
+
+@media (max-width: 575px) {
+  :root {
+    --header-height: 56px;
+    --page-gutter: 0.75rem;
+  }
+
+  body {
+    background-attachment: scroll;
+  }
 }
 
 .text-sky {

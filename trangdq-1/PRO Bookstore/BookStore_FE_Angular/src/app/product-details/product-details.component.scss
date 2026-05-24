@@ -1,5 +1,6 @@
 img {
-  height: 80vh;
+  max-height: 80vh;
+  height: auto;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -72,8 +73,30 @@ img {
 }
 
 @media (max-width: 768px) {
+  .details-container {
+    width: 100%;
+  }
+
+  .detail-part {
+    padding: 1.25rem;
+  }
+
   .img-part {
     padding: 0 0 10px 0;
+  }
+
+  img {
+    max-height: 50vh;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .btn-group .btn {
+    width: 100%;
   }
 }
 

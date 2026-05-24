@@ -1,8 +1,17 @@
+<ng-template #loadingTpl>
+  <div class="container py-5 text-center">
+    <div class="spinner-border text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="text-white mt-3 mb-0">Loading products...</p>
+  </div>
+</ng-template>
+
 <ng-template #display>
   <div class="container my-4">
-    <div class="d-flex justify-content-between align-items-center">
-      <h2 class="text-white">Explore Our Collection</h2>
-      <div class="btn-group">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center gap-3 home-toolbar">
+      <h2 class="text-white mb-0">Explore Our Collection</h2>
+      <div class="btn-group flex-wrap home-sort-group">
         <a [ngClass]="{ 'active': query_params.startsWith('?name')}" [queryParams]="{ name: name_asc }"
            [routerLink]="['/home', 1]" class="btn btn-outline-light">Sort by
           Name {{ !name_asc ? '▲' : '▼' }}</a>
@@ -17,7 +26,7 @@
   </div>
 
   <div class="container pb-5">
-    <div class="row row-cols-1 row-cols-md-5 g-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
       <div *ngFor="let product of products" class="col">
         <div class="card h-100">
           <img [src]="product.images[0]" alt="Product's image" class="card-img-top">
@@ -47,5 +56,6 @@
 <ng-template #notfound>
   <app-page404 message="No products was found. Please come back later." title="Products Not Found"></app-page404>
 </ng-template>
-<ng-container *ngIf="products.length, then display, else notfound">
-</ng-container>
+<ng-container *ngIf="loading; then loadingTpl"></ng-container>
+<ng-container *ngIf="!loading && products.length; then display"></ng-container>
+<ng-container *ngIf="hasLoaded && !loading && !products.length; then notfound"></ng-container>

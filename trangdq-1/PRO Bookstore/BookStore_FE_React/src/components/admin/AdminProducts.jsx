@@ -97,28 +97,29 @@ export default class AdminProducts extends React.Component {
                         <div className="col-3">
                             <aside className="admin-aside">
                                 <div className="web-name">
-                                    <a href={fe_url + 'home'}><img className="admin-logo" src="/images/account.jpg"
-                                                                   alt="logo"/>&nbsp;<span>PRO BOOKSTORE</span></a>
-
+                                    <a href={fe_url + 'home'}>
+                                        <img className="admin-logo" src="/images/account.jpg" alt="logo"/>
+                                        <span>PRO BOOKSTORE</span>
+                                    </a>
                                 </div>
-                                <a className="admin-navigation current-pos" href={fe_url + "admin/products"}>Manage
-                                    books</a>
-                                <div className="dropdown">
-                                    <a className="admin-navigation"
-                                       href={fe_url + "admin/orders/1?status=customer_confirmed"}>Manage
-                                        orders <i className="bi bi-chevron-down dropdown_icon"></i></a>
-                                    <div className="dropdown-content">
-                                        <a href={fe_url + "admin/orders?status=customer_confirmed"}>Checked out
-                                            orders</a>
-                                        <a href={fe_url + "admin/orders?status=admin_preparing"}>Preparing orders</a>
-                                        <a href={fe_url + "admin/orders?status=shipping"}>Shipping orders</a>
-                                        <a href={fe_url + "admin/orders?status=customer_request_cancel"}>Canceling
-                                            orders</a>
-                                        <a href={fe_url + "admin/orders?status=canceled"}>Canceled orders</a><a
-                                        href={fe_url + "admin/orders?status=success"}>Successful orders</a>
+                                <nav className="admin-nav-list">
+                                    <a className="admin-navigation current-pos" href={fe_url + "admin/products"}>Manage books</a>
+                                    <div className="dropdown">
+                                        <a className="admin-navigation"
+                                           href={fe_url + "admin/orders?status=customer_confirmed"}>
+                                            Manage orders <i className="bi bi-chevron-down dropdown_icon"></i>
+                                        </a>
+                                        <div className="dropdown-content">
+                                            <a href={fe_url + "admin/orders?status=customer_confirmed"}>Checked out orders</a>
+                                            <a href={fe_url + "admin/orders?status=admin_preparing"}>Preparing orders</a>
+                                            <a href={fe_url + "admin/orders?status=shipping"}>Shipping orders</a>
+                                            <a href={fe_url + "admin/orders?status=customer_request_cancel"}>Canceling orders</a>
+                                            <a href={fe_url + "admin/orders?status=canceled"}>Canceled orders</a>
+                                            <a href={fe_url + "admin/orders?status=success"}>Successful orders</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <a className="admin-navigation" href={fe_url + "admin/vouchers"}>Manage vouchers</a>
+                                    <a className="admin-navigation" href={fe_url + "admin/vouchers"}>Manage vouchers</a>
+                                </nav>
                             </aside>
                         </div>
                         {/*header*/}

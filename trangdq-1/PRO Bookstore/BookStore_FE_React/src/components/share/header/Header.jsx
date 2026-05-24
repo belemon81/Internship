@@ -116,14 +116,6 @@ class HeaderWithNavigate extends Component {
     render() {
         return (
             <nav className="site-header">
-                {this.state.menuOpen &&
-                    <button
-                        type="button"
-                        className="menu-backdrop"
-                        aria-label="Close menu"
-                        onClick={this.closeMenu}
-                    />
-                }
                 <div className='top'>
                     {!accessToken() ?
                         <nav className='top-auth ml-auto'>
@@ -137,6 +129,14 @@ class HeaderWithNavigate extends Component {
                         </nav>
                     }
                 </div>
+                {this.state.menuOpen &&
+                    <button
+                        type="button"
+                        className="menu-backdrop"
+                        aria-label="Close menu"
+                        onClick={this.closeMenu}
+                    />
+                }
                 <div className='menu'>
                     <div className="menu-brand">
                         <a href='/home' onClick={this.closeMenu}>
@@ -154,44 +154,16 @@ class HeaderWithNavigate extends Component {
                     </div>
 
                     <div className={`menu-panel ${this.state.menuOpen ? 'menu-panel-open' : ''}`}>
-                        <form className='search-bar menu-search-first' onSubmit={this.search}>
+                        <form className='search-bar menu-search' onSubmit={this.search}>
                             <input type='search' placeholder='Enter name of book'
                                    className={userId() ? 'search-input pl-2' : 'search search-input pl-2'}
                                    id="name" onChange={this.handleChange}/>
                             <button type="submit" className='btn green-btn menu-search-btn'>Search</button>
                         </form>
 
-                        <div className='cats'>
-                            {(role() === "ROLE_ADMIN" || role() === "ROLE_CUSTOMER") &&
-                                <div className={`dropdown ${this.state.openDropdown === 'orders' ? 'is-open' : ''}`}>
-                                    <button type="button" className="drop-btn" aria-expanded={this.state.openDropdown === 'orders'}
-                                            onClick={this.toggleDropdown('orders')}>
-                                        <i className="bi bi-cart-check"/>
-                                        <span className="drop-label">Orders</span>
-                                    </button>
-                                    <div className="dropdown-content">
-                                        <a href={fe_url + 'my_orders?status=customer_confirmed'} onClick={this.closeMenu}>Checked out orders</a>
-                                        <a href={fe_url + 'my_orders?status=admin_preparing'} onClick={this.closeMenu}>Preparing orders</a>
-                                        <a href={fe_url + 'my_orders?status=shipping'} onClick={this.closeMenu}>Shipping orders</a>
-                                        <a href={fe_url + 'my_orders?status=customer_request_cancel'} onClick={this.closeMenu}>Canceling orders</a>
-                                        <a href={fe_url + 'my_orders?status=canceled'} onClick={this.closeMenu}>Canceled orders</a>
-                                        <a href={fe_url + 'my_orders?status=success'} onClick={this.closeMenu}>Successful orders</a>
-                                    </div>
-                                </div>}
-                            {role() === "ROLE_ADMIN" &&
-                                <div className={`dropdown pr-3 ${this.state.openDropdown === 'admin' ? 'is-open' : ''}`}>
-                                    <button type="button" className="drop-btn" aria-expanded={this.state.openDropdown === 'admin'}
-                                            onClick={this.toggleDropdown('admin')}>
-                                        <i className="bi bi-person"/>
-                                        <span className="drop-label">Admin</span>
-                                    </button>
-                                    <div className="dropdown-content">
-                                        <a href={fe_url + 'admin/products'} onClick={this.closeMenu}>Manage books</a>
-                                        <a href={fe_url + 'admin/orders?status=customer_confirmed'} onClick={this.closeMenu}>Manage orders</a>
-                                        <a href={fe_url + 'admin/vouchers'} onClick={this.closeMenu}>Manage vouchers</a>
-                                    </div>
-                                </div>}
-                            <span className="category-links pt-0">
+                        <nav className="menu-section menu-section-categories">
+                            <p className="menu-section-title">Categories</p>
+                            <div className="category-links">
                                 <a href={this.baseLink + "detective"}
                                    className={this.isActive('detective') ? 'active' : ''}
                                    onClick={this.closeMenu}>Detective</a>
@@ -210,19 +182,59 @@ class HeaderWithNavigate extends Component {
                                 <a href={this.baseLink + "literature"}
                                    className={this.isActive('literature') ? 'active' : ''}
                                    onClick={this.closeMenu}>Literature</a>
-                            </span>
-                        </div>
+                            </div>
+                        </nav>
 
                         {(role() === "ROLE_ADMIN" || role() === "ROLE_CUSTOMER") &&
-                            <div className="menu-actions">
-                                <Link to={fe_url + "cart"} className="mt-2 menu-cart" onClick={this.closeMenu}>
-                                    <i className="bi bi-cart2 customCart">
-                                        <span className='numberOfItem'>{this.state.numberOfItemInCart}</span>
-                                    </i>
-                                </Link>
-                                <Link to='/my_profile' onClick={this.closeMenu}>
-                                    <img className="account" src={this.state.avatar} alt="avatar"/>
-                                </Link>
+                            <div className="menu-section menu-section-account">
+                                <p className="menu-section-title">Account</p>
+
+                                <div className={`menu-dropdown-row ${this.state.openDropdown === 'orders' ? 'is-open' : ''}`}>
+                                    <button type="button" className="menu-row-btn"
+                                            onClick={this.toggleDropdown('orders')}>
+                                        <i className="bi bi-cart-check"/>
+                                        <span>My orders</span>
+                                        <i className={`bi bi-chevron-down menu-chevron ${this.state.openDropdown === 'orders' ? 'open' : ''}`}/>
+                                    </button>
+                                    <div className="menu-sub-links">
+                                        <a href={fe_url + 'my_orders?status=customer_confirmed'} onClick={this.closeMenu}>Checked out orders</a>
+                                        <a href={fe_url + 'my_orders?status=admin_preparing'} onClick={this.closeMenu}>Preparing orders</a>
+                                        <a href={fe_url + 'my_orders?status=shipping'} onClick={this.closeMenu}>Shipping orders</a>
+                                        <a href={fe_url + 'my_orders?status=customer_request_cancel'} onClick={this.closeMenu}>Canceling orders</a>
+                                        <a href={fe_url + 'my_orders?status=canceled'} onClick={this.closeMenu}>Canceled orders</a>
+                                        <a href={fe_url + 'my_orders?status=success'} onClick={this.closeMenu}>Successful orders</a>
+                                    </div>
+                                </div>
+
+                                {role() === "ROLE_ADMIN" &&
+                                    <div className={`menu-dropdown-row ${this.state.openDropdown === 'admin' ? 'is-open' : ''}`}>
+                                        <button type="button" className="menu-row-btn"
+                                                onClick={this.toggleDropdown('admin')}>
+                                            <i className="bi bi-person-gear"/>
+                                            <span>Admin panel</span>
+                                            <i className={`bi bi-chevron-down menu-chevron ${this.state.openDropdown === 'admin' ? 'open' : ''}`}/>
+                                        </button>
+                                        <div className="menu-sub-links">
+                                            <a href={fe_url + 'admin/products'} onClick={this.closeMenu}>Manage books</a>
+                                            <a href={fe_url + 'admin/orders?status=customer_confirmed'} onClick={this.closeMenu}>Manage orders</a>
+                                            <a href={fe_url + 'admin/vouchers'} onClick={this.closeMenu}>Manage vouchers</a>
+                                        </div>
+                                    </div>
+                                }
+
+                                <div className="menu-quick-actions">
+                                    <Link to={fe_url + "cart"} className="menu-quick-item" onClick={this.closeMenu}>
+                                        <i className="bi bi-cart2"/>
+                                        <span>Shopping cart</span>
+                                        {this.state.numberOfItemInCart > 0 &&
+                                            <span className="menu-badge">{this.state.numberOfItemInCart}</span>
+                                        }
+                                    </Link>
+                                    <Link to='/my_profile' className="menu-quick-item" onClick={this.closeMenu}>
+                                        <img className="menu-avatar" src={this.state.avatar} alt="avatar"/>
+                                        <span>My profile</span>
+                                    </Link>
+                                </div>
                             </div>
                         }
                     </div>
